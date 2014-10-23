@@ -22,12 +22,18 @@
                                 <state key="normal" title="Record">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="recordTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5aj-zb-f50"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szG-2G-5Gi">
                                 <rect key="frame" x="323" y="182" width="33" height="30"/>
                                 <state key="normal" title="Stop">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="stopTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sLz-2B-vK3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tR8-JD-0Bt">
                                 <rect key="frame" x="257" y="248" width="30" height="30"/>
@@ -38,6 +44,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="recordButton" destination="dyJ-QP-kRO" id="bbF-d1-npq"/>
+                    </connections>
                 </viewController>
             </objects>
         </scene>
