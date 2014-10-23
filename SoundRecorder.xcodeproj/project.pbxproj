@@ -13,6 +13,7 @@
 		2DC9B61619F958A900D75D10 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DC9B61519F958A900D75D10 /* Images.xcassets */; };
 		2DC9B61919F958A900D75D10 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DC9B61719F958A900D75D10 /* LaunchScreen.xib */; };
 		2DC9B62519F958A900D75D10 /* SoundRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC9B62419F958A900D75D10 /* SoundRecorderTests.swift */; };
+		2DC9B62F19F9594F00D75D10 /* SoundRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC9B62E19F9594F00D75D10 /* SoundRecorder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		2DC9B61E19F958A900D75D10 /* SoundRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DC9B62319F958A900D75D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DC9B62419F958A900D75D10 /* SoundRecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundRecorderTests.swift; sourceTree = "<group>"; };
+		2DC9B62E19F9594F00D75D10 /* SoundRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRecorder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				2DC9B61519F958A900D75D10 /* Images.xcassets */,
 				2DC9B61719F958A900D75D10 /* LaunchScreen.xib */,
 				2DC9B60C19F958A900D75D10 /* Supporting Files */,
+				2DC9B62E19F9594F00D75D10 /* SoundRecorder.swift */,
 			);
 			path = SoundRecorder;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			files = (
 				2DC9B61119F958A900D75D10 /* ViewController.swift in Sources */,
 				2DC9B60F19F958A900D75D10 /* AppDelegate.swift in Sources */,
+				2DC9B62F19F9594F00D75D10 /* SoundRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
