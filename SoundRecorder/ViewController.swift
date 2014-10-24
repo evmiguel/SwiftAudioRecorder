@@ -17,9 +17,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     
-    var recorder = AVAudioRecorder()
-    var player = AVAudioPlayer()
-    
+    var recorder : AVAudioRecorder!
+    var player : AVAudioPlayer!
+    var soundFileURL:NSURL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +29,33 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         playButton.enabled = false
         
 
-        let paths = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        var documentsURL = paths[0] as NSURL
-        let soundFileURL = documentsURL.URLByAppendingPathComponent("sound.mp3")
+//        var paths = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        var error: NSError?
+        
+        var format = NSDateFormatter()
+        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+        var currentFileName = "recording-\(format.stringFromDate(NSDate.date())).m4a"
+        println(currentFileName)
+        
+        var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        var docsDir: AnyObject = dirPaths[0]
+        var soundFilePath = docsDir.stringByAppendingPathComponent(currentFileName)
+        soundFileURL = NSURL(fileURLWithPath: soundFilePath)
+        
+        let filemanager = NSFileManager.defaultManager()
+        if filemanager.fileExistsAtPath(soundFilePath) {
+            // probably won't happen. want to do something about it?
+            println("sound exists")
+        }
         var recordSettings = [
-            AVFormatIDKey: kAudioFormatAppleLossless,
-            AVEncoderAudioQualityKey : AVAudioQuality.Max.toRaw(),
-            AVEncoderBitRateKey : 320000,
+            AVFormatIDKey: kAudioFormatMPEG4AAC,
             AVNumberOfChannelsKey: 2,
             AVSampleRateKey : 44100.0
         ]
-        var error: NSError?
-        recorder = AVAudioRecorder(URL: soundFileURL, settings: recordSettings, error: &error)
+        
+        
+        recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
+        
         if let e = error {
             println(e.localizedDescription)
         } else {
@@ -54,9 +69,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func recordTapped(sender: AnyObject) {
-        if player.playing {
-            player.stop()
-        }
+    //    if player.playing {
+    //        player.stop()
+    //    }
         
         if !recorder.recording {
             var session = AVAudioSession.sharedInstance()
