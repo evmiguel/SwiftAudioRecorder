@@ -2,16 +2,15 @@
 //  ViewController.swift
 //  SoundRecorder
 //
-//  Created by Erika V. Miguel on 10/23/14.
-//  Copyright (c) 2014 Erika V. Miguel. All rights reserved.
+//  Created by Erika V. Miguel and Jessica Mann on 10/23/14.
+//  Copyright (c) 2014 Erika V. Miguel and Jessica Mann. All rights reserved.
 //
 
-//TODO: Rename buttons, need to reconnect to viewcontroller ad disconnect
 
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVAudioRecorderDelegate {
+class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -28,8 +27,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.enabled = false
         playButton.enabled = false
         
-
-//        var paths = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         var error: NSError?
         
         var format = NSDateFormatter()
@@ -53,7 +50,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
             AVSampleRateKey : 44100.0
         ]
         
-        
         recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
         
         if let e = error {
@@ -63,9 +59,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
             recorder.meteringEnabled = true
             recorder.prepareToRecord() // creates/overwrites the file at soundFileURL
         }
-        
-        
-        
     }
     
     @IBAction func recordTapped(sender: AnyObject) {
@@ -103,24 +96,32 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func playTapped(sender: AnyObject) {
         // disable record button while playing; will enable later
-        recordButton.enabled = false;
+        recordButton.enabled = false
+        stopButton.enabled = true
         
         var error: NSError?
-        self.player = AVAudioPlayer(contentsOfURL: soundFileURL!, error: &error)
+        
+        //initalize with recorder url
+        player = AVAudioPlayer(contentsOfURL: recorder.url, error: nil)
+        
         // if player doesn't exist for this file
         if player == nil {
             if let e = error {
                 println(e.localizedDescription)  // ...not quite sure what this does
             }
         }
-        //player.delegate = self
-        player.prepareToPlay()
-        player.volume = 1.0
-        player.play()
-        println("playing!")
+        
+        if !recorder.recording{
+            player.delegate = self
+            player.prepareToPlay()
+            //player.volume = 1.0
+            player.play()
+            println("playing!")
+        }
+        
         
         // enable record button
-        recordButton.enabled = true;
+        recordButton.enabled = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -133,17 +134,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
             stopButton.enabled = false
             playButton.enabled = true
             recordButton.setTitle("Record", forState:.Normal)
-            
-            // ios8 and later
-/*            var alert = UIAlertController(title: "Recorder",
-                message: "Finished Recording",
-                preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Keep", style: .Default, handler: {action in
-                println("keep was tapped")
-            }))
-            alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: {action in self.recorder.deleteRecording()})) */
-            
-          //  self.presentViewController(alert, animated:true, completion:nil)
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+        var alert = UIAlertView(title: "Done", message: "Finished Playing the recording", delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
     }
     
     func audioRecorderEncodeErrorDidOccur(recorder: AVAudioRecorder!,
