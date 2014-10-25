@@ -69,9 +69,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func recordTapped(sender: AnyObject) {
-    //    if player.playing {
-    //        player.stop()
-    //    }
+        if player != nil && player.playing {
+            player.stop()
+        }
         
         if !recorder.recording {
             var session = AVAudioSession.sharedInstance()
@@ -82,13 +82,45 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
             recorder.pause()
             recordButton.setTitle("Record", forState: UIControlState.Normal)
         }
+        stopButton.enabled = true
     }
     
     @IBAction func stopTapped(sender: AnyObject) {
-        recorder.stop()
+        
+        // assuming that you can also stop the player
+        if player != nil && player.playing {
+            player.stop()
+            println("player stopped")
+        } else if recorder != nil && recorder.recording {
+            recorder.stop()
+            println("recorder stopped")
+        }
+        
         var audioSession = AVAudioSession.sharedInstance()
         audioSession.setActive(false, withOptions: nil, error: nil)
         
+    }
+    
+    @IBAction func playTapped(sender: AnyObject) {
+        // disable record button while playing; will enable later
+        recordButton.enabled = false;
+        
+        var error: NSError?
+        self.player = AVAudioPlayer(contentsOfURL: soundFileURL!, error: &error)
+        // if player doesn't exist for this file
+        if player == nil {
+            if let e = error {
+                println(e.localizedDescription)  // ...not quite sure what this does
+            }
+        }
+        //player.delegate = self
+        player.prepareToPlay()
+        player.volume = 1.0
+        player.play()
+        println("playing!")
+        
+        // enable record button
+        recordButton.enabled = true;
     }
     
     override func didReceiveMemoryWarning() {
