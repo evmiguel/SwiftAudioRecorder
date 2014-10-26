@@ -345,6 +345,7 @@
 				INFOPLIST_FILE = SoundRecorder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -355,6 +356,7 @@
 				INFOPLIST_FILE = SoundRecorder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -411,6 +413,7 @@
 				2DC9B62A19F958A900D75D10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2DC9B62B19F958A900D75D10 /* Build configuration list for PBXNativeTarget "SoundRecorderTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +422,7 @@
 				2DC9B62D19F958A900D75D10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
