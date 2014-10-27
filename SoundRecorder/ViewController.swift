@@ -145,7 +145,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         // Dispose of any resources that can be recreated.
     }
     
-    // delegate protocol that MUST be implemented for AVAudioRecorder
+    // delegate protocol that MUST be implemented if class implements AVAudioRecorderDelegate
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!,
         successfully flag: Bool) {
             println("finished recording \(flag)")
@@ -154,13 +154,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             recordButton.setTitle("Record", forState:.Normal)
     }
     
-    // delegate protocol that MUST be implemented for AVAudioRecorder
+    // delegate protocol that MUST be implemented if class implements AVAudioRecorderDelegate
     func audioRecorderEncodeErrorDidOccur(recorder: AVAudioRecorder!,
         error: NSError!) {
             println("\(error.localizedDescription)")
     }
     
-    // delegate protocol that MUST be implemented for AVAudioPlayer
+    // delegate protocol that MUST be implemented if class implements AVAudioPlayerDelegate
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
         var alert = UIAlertView(title: "Done", message: "Finished Playing the recording", delegate: nil, cancelButtonTitle: "OK")
         alert.show()
