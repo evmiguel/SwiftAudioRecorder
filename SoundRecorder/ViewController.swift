@@ -35,7 +35,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         // recorded file named with time stamp
         var format = NSDateFormatter()
         format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        var currentFileName = "recording-\(format.stringFromDate(NSDate.date())).m4a"
+        var timeStamp = NSDate()
+        var currentFileName = "recording-\(format.stringFromDate(timeStamp)).m4a"
         
         // for capturing error information
         var error: NSError?
@@ -85,6 +86,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         // if the recorder is not recording, then start recording
         if !recorder.recording {
             var session = AVAudioSession.sharedInstance()
+            
+            session.setCategory(AVAudioSessionCategoryPlayAndRecord,
+                withOptions: AVAudioSessionCategoryOptions.DefaultToSpeaker,
+                error: nil)
+            
             session.setActive(true, withOptions: nil, error: nil)
             recorder.record()
             recordButton.setTitle("Pause", forState: UIControlState.Normal)
